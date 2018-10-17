@@ -5,15 +5,14 @@
 The Python client for the [Coinbase Pro API](https://docs.pro.coinbase.com/) (formerly known as
 the GDAX)
 
-##### Provided under MIT License by Daniel Paquin.
-*Note: this library may be subtly broken or buggy. The code is released under
-the MIT License – please take the following message to heart:*
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+### Note
+This is a fork of the original [cbpro project](https://github.com/danpaquin/coinbasepro-python).
+I created this fork because between September and October of 2018, the maintainers of
+that project seemed to be inactive in reviewing and merging pull requests. The goal of
+this fork is as follows:
+- Keep reasonably up-to-date with upstream
+- Improve developer workflow and style
+- Surface coverage stats to encourage unit testing
 
 ## Benefits
 - A simple to use python wrapper for both public and authenticated endpoints.
@@ -40,7 +39,7 @@ documentation.**
 
 - You may manually install the project or use ```pip```:
 ```python
-pip install cbpro
+pip install cbpro2
 #or
 pip install git+git://github.com/yiwensong/coinbasepro-python.git
 ```
