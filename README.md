@@ -1,6 +1,7 @@
 # coinbasepro-python
 [![Build Status](https://travis-ci.org/yiwensong/coinbasepro-python.svg?branch=master)](https://travis-ci.org/yiwensong/coinbasepro-python)
 [![Coverage Status](https://coveralls.io/repos/github/yiwensong/coinbasepro-python/badge.svg?branch=master)](https://coveralls.io/github/yiwensong/coinbasepro-python?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/cbpro2/badge/?version=master&style=flat)](https://cbpro2.readthedocs.io/en/master/)
 
 The Python client for the [Coinbase Pro API](https://docs.pro.coinbase.com/) (formerly known as
 the GDAX)
