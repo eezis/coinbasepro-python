@@ -5,7 +5,6 @@ example.py
 build/
 dist/
 *.egg-info/
-*.rst
 venv/
 *log.txt
 cbpro/__pycache__/
@@ -14,4 +13,4 @@ cbpro/__pycache__/
 tests/__pycache__/
 .pytest_cache
 .tox/
-docs/build
+docs/build/*
