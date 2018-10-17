@@ -1,7 +1,8 @@
-import hmac
-import hashlib
-import time
 import base64
+import hashlib
+import hmac
+import time
+
 from requests.auth import AuthBase
 
 

@@ -1,5 +1,6 @@
 # coinbasepro-python
-[![Build Status](https://travis-ci.org/danpaquin/coinbasepro-python.svg?branch=master)](https://travis-ci.org/danpaquin/coinbasepro-python)
+[![Build Status](https://travis-ci.org/yiwensong/coinbasepro-python.svg?branch=master)](https://travis-ci.org/yiwensong/coinbasepro-python)
+[![Coverage Status](https://coveralls.io/repos/github/yiwensong/coinbasepro-python/badge.svg?branch=master)](https://coveralls.io/github/yiwensong/coinbasepro-python?branch=master)
 
 The Python client for the [Coinbase Pro API](https://docs.pro.coinbase.com/) (formerly known as
 the GDAX)
@@ -41,7 +42,7 @@ documentation.**
 ```python
 pip install cbpro
 #or
-pip install git+git://github.com/danpaquin/coinbasepro-python.git
+pip install git+git://github.com/yiwensong/coinbasepro-python.git
 ```
 
 ### Public Client
@@ -124,7 +125,7 @@ auth_client = cbpro.AuthenticatedClient(key, b64secret, passphrase,
 Some calls are [paginated](https://docs.pro.coinbase.com/#pagination), meaning multiple
 calls must be made to receive the full set of data. The CB Pro Python API provides
 an abstraction for paginated endpoints in the form of generators which provide a
-clean interface for iteration but may make multiple HTTP requests behind the 
+clean interface for iteration but may make multiple HTTP requests behind the
 scenes. The pagination options `before`, `after`, and `limit` may be supplied as
 keyword arguments if desired, but aren't necessary for typical use cases.
 ```python
@@ -132,11 +133,11 @@ fills_gen = auth_client.get_fills()
 # Get all fills (will possibly make multiple HTTP requests)
 all_fills = list(fills_gen)
 ```
-One use case for pagination parameters worth pointing out is retrieving only 
-new data since the previous request. For the case of `get_fills()`, the 
-`trade_id` is the parameter used for indexing. By passing 
-`before=some_trade_id`, only fills more recent than that `trade_id` will be 
-returned. Note that when using `before`, a maximum of 100 entries will be 
+One use case for pagination parameters worth pointing out is retrieving only
+new data since the previous request. For the case of `get_fills()`, the
+`trade_id` is the parameter used for indexing. By passing
+`before=some_trade_id`, only fills more recent than that `trade_id` will be
+returned. Note that when using `before`, a maximum of 100 entries will be
 returned - this is a limitation of CB Pro.
 ```python
 from itertools import islice
@@ -186,23 +187,23 @@ auth_client.sell(price='200.00', #USD
 ```
 ```python
 # Limit order-specific method
-auth_client.place_limit_order(product_id='BTC-USD', 
-                              side='buy', 
-                              price='200.00', 
+auth_client.place_limit_order(product_id='BTC-USD',
+                              side='buy',
+                              price='200.00',
                               size='0.01')
 ```
 ```python
-# Place a market order by specifying amount of USD to use. 
+# Place a market order by specifying amount of USD to use.
 # Alternatively, `size` could be used to specify quantity in BTC amount.
-auth_client.place_market_order(product_id='BTC-USD', 
-                               side='buy', 
+auth_client.place_market_order(product_id='BTC-USD',
+                               side='buy',
                                funds='100.00')
 ```
 ```python
 # Stop order. `funds` can be used instead of `size` here.
-auth_client.place_stop_order(product_id='BTC-USD', 
-                              side='buy', 
-                              price='200.00', 
+auth_client.place_stop_order(product_id='BTC-USD',
+                              side='buy',
+                              price='200.00',
                               size='0.01')
 ```
 
@@ -333,9 +334,9 @@ while (wsClient.message_count < 500):
 wsClient.close()
 ```
 ## Testing
-A test suite is under development. Tests for the authenticated client require a 
-set of sandbox API credentials. To provide them, rename 
-`api_config.json.example` in the tests folder to `api_config.json` and edit the 
+A test suite is under development. Tests for the authenticated client require a
+set of sandbox API credentials. To provide them, rename
+`api_config.json.example` in the tests folder to `api_config.json` and edit the
 file accordingly. To run the tests, start in the project directory and run
 ```
 python -m pytest
@@ -355,10 +356,10 @@ order_book.close()
 ```
 
 ### Testing
-Unit tests are under development using the pytest framework. Contributions are 
+Unit tests are under development using the pytest framework. Contributions are
 welcome!
 
-To run the full test suite, in the project 
+To run the full test suite, in the project
 directory run:
 ```bash
 python -m pytest

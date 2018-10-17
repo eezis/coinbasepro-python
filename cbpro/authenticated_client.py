@@ -3,16 +3,17 @@
 # Daniel Paquin
 #
 # For authenticated requests to the Coinbase exchange
-
-import hmac
-import hashlib
-import time
-import requests
 import base64
+import hashlib
+import hmac
 import json
+import time
+
+import requests
 from requests.auth import AuthBase
-from cbpro.public_client import PublicClient
+
 from cbpro.cbpro_auth import CBProAuth
+from cbpro.public_client import PublicClient
 
 
 class AuthenticatedClient(PublicClient):
@@ -26,6 +27,7 @@ class AuthenticatedClient(PublicClient):
         auth (CBProAuth): Custom authentication handler for each request.
         session (requests.Session): Persistent HTTP connection object.
     """
+
     def __init__(self, key, b64secret, passphrase,
                  api_url="https://api.pro.coinbase.com"):
         """ Create an instance of the AuthenticatedClient class.
@@ -628,7 +630,8 @@ class AuthenticatedClient(PublicClient):
 
         """
         if (product_id is None) and (order_id is None):
-            raise ValueError('Either product_id or order_id must be specified.')
+            raise ValueError(
+                'Either product_id or order_id must be specified.')
 
         params = {}
         if product_id:
@@ -692,7 +695,7 @@ class AuthenticatedClient(PublicClient):
         params = {
             'amount': amount,
             'currency': currency  # example: USD
-            }
+        }
         return self._send_message('post', '/funding/repay',
                                   data=json.dumps(params))
 

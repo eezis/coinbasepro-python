@@ -1,3 +1,10 @@
 -e .
 coverage
+flake8
+ipdb
+ipython
+pre-commit
+pylint
 pytest
+pytest
+twine

@@ -1,8 +1,10 @@
-import pytest
+import datetime
 import time
 from itertools import islice
-import datetime
+
+import pytest
 from dateutil.relativedelta import relativedelta
+
 from cbpro.public_client import PublicClient
 
 
@@ -30,10 +32,12 @@ class TestPublicClient(object):
         assert 'bids' in r
 
         if level in (1, None) and (len(r['asks']) > 1 or len(r['bids']) > 1):
-            pytest.fail('Fail: Level 1 should only return the best ask and bid')
+            pytest.fail(
+                'Fail: Level 1 should only return the best ask and bid')
 
         if level is 2 and (len(r['asks']) > 50 or len(r['bids']) > 50):
-            pytest.fail('Fail: Level 2 should only return the top 50 asks and bids')
+            pytest.fail(
+                'Fail: Level 2 should only return the top 50 asks and bids')
 
         if level is 3 and (len(r['asks']) < 50 or len(r['bids']) < 50):
             pytest.fail('Fail: Level 3 should return the full order book')
@@ -55,10 +59,11 @@ class TestPublicClient(object):
                              [(current_time - relativedelta(months=1),
                                current_time, 21600)])
     def test_get_historic_rates(self, client, start, end, granularity):
-        r = client.get_product_historic_rates('BTC-USD', start=start, end=end, granularity=granularity)
+        r = client.get_product_historic_rates(
+            'BTC-USD', start=start, end=end, granularity=granularity)
         assert type(r) is list
         for ticker in r:
-            assert( all( [type(x) in (int, float) for x in ticker ] ) )
+            assert(all([type(x) in (int, float) for x in ticker]))
 
     def test_get_product_24hr_stats(self, client):
         r = client.get_product_24hr_stats('BTC-USD')

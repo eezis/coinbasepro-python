@@ -3,10 +3,10 @@
 # David Caseria
 #
 # Live order book updated from the Coinbase Websocket Feed
+import pickle
+from decimal import Decimal
 
 from sortedcontainers import SortedDict
-from decimal import Decimal
-import pickle
 
 from cbpro.public_client import PublicClient
 from cbpro.websocket_client import WebsocketClient
@@ -39,7 +39,8 @@ class OrderBook(WebsocketClient):
     def reset_book(self):
         self._asks = SortedDict()
         self._bids = SortedDict()
-        res = self._client.get_product_order_book(product_id=self.product_id, level=3)
+        res = self._client.get_product_order_book(
+            product_id=self.product_id, level=3)
         for bid in res['bids']:
             self.add({
                 'id': bid[2],
@@ -88,7 +89,6 @@ class OrderBook(WebsocketClient):
         self.reset_book()
         print('Error: messages missing ({} - {}). Re-initializing  book at sequence.'.format(
             gap_start, gap_end, self._sequence))
-
 
     def add(self, order):
         order = {
@@ -205,7 +205,8 @@ class OrderBook(WebsocketClient):
             except KeyError:
                 continue
             for order in this_ask:
-                result['asks'].append([order['price'], order['size'], order['id']])
+                result['asks'].append(
+                    [order['price'], order['size'], order['id']])
         for bid in self._bids:
             try:
                 # There can be a race condition here, where a price point is removed
@@ -215,7 +216,8 @@ class OrderBook(WebsocketClient):
                 continue
 
             for order in this_bid:
-                result['bids'].append([order['price'], order['size'], order['id']])
+                result['bids'].append(
+                    [order['price'], order['size'], order['id']])
         return result
 
     def get_ask(self):
@@ -247,7 +249,6 @@ if __name__ == '__main__':
     import sys
     import time
     import datetime as dt
-
 
     class OrderBookConsole(OrderBook):
         ''' Logs real-time changes to the bid-ask spread to the console '''

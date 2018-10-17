@@ -1,14 +1,22 @@
 sudo: false
 language: python
-# cache package wheels (1 cache per python version)
 cache: pip
-python: 
-  - "2.7"
-  - "3.5"
-  - "3.6"
-
+python:
+- '2.7'
+- '3.5'
+- '3.6'
 install:
-  - pip install tox-travis
-
+- pip install tox-travis
+- pip install coveralls
 script:
-  - tox
+- tox
+after_success:
+- coveralls
+- make clean
+deploy:
+  provider: pypi
+  user: yiwensong
+  on:
+    tags: true
+  password:
+    secure: gIiRsdWGfAU9GkTGPi6bAsswSAazNr5zdx6Jyphh1iU7b7JaXQtGhjRRelpN1B62/BVVr/n5Op4iA9okaltkteSrjY+i6xhe44LETQRH8/zM/B8Wm1YAXrI4c1eFabWNP1KjW44C4esocDUI5aX3hvXv0gSVcPLqQl4UjoLcb+X/nCWYHtwW37cUzoOoMKGTlg6mm3e8jnJQLqT67InwXb+As616Ka6x5/fJqiJauwsc82eDmQLkQD7/AduVviAAqqgJUf/JN4PUop1yZAj8R4Zs9cvMcmhWU3ZCtjV59l6QyjYiQlbBmL8oOYpeHhqzGRLdF+JUo6k/VYkyWDdZYWt7JOs0RKUTKMdj7QbDj5Px5+XSW002e3x//u0NUl/5cP+QqDcS7uNFLvGdVvWYukFfr8hYXFHRJf/8XI2PUtQnmiHo7u0GpvczOmEt86wOQU1OgALOVgONS0AzOLpmF/CVg5BgcpTPPKYBgfF/BDDnpMda/2XhKbzYne+ZLsx3w5RfoLMlJCqFimyBOMDtRhfUBBcp4/OMOCwoZ1IHE1NHFW6f0L4EuGLbOpeuP+YGCkVeKcn0dFyJzSElXe0IiEWg//116KvwE+SmpqqpdPwAm6m4bAVdwq4mKzb9fO0QPj1XFTaLozgCmhRFtUS6ofOMbszvQSeJzQi+5IiDSqI=

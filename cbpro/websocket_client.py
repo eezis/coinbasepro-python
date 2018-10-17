@@ -4,16 +4,19 @@
 #
 #
 # Template object to receive messages from the Coinbase Websocket Feed
-
 from __future__ import print_function
-import json
+
 import base64
-import hmac
 import hashlib
+import hmac
+import json
 import time
 from threading import Thread
-from websocket import create_connection, WebSocketConnectionClosedException
+
 from pymongo import MongoClient
+from websocket import create_connection
+from websocket import WebSocketConnectionClosedException
+
 from cbpro.cbpro_auth import get_auth_headers
 
 
@@ -58,12 +61,14 @@ class WebsocketClient(object):
         if self.channels is None:
             sub_params = {'type': 'subscribe', 'product_ids': self.products}
         else:
-            sub_params = {'type': 'subscribe', 'product_ids': self.products, 'channels': self.channels}
+            sub_params = {'type': 'subscribe',
+                          'product_ids': self.products, 'channels': self.channels}
 
         if self.auth:
             timestamp = str(time.time())
             message = timestamp + 'GET' + '/users/self/verify'
-            auth_headers = get_auth_headers(timestamp, message, self.api_key, self.api_secret, self.api_passphrase)
+            auth_headers = get_auth_headers(
+                timestamp, message, self.api_key, self.api_secret, self.api_passphrase)
             sub_params['signature'] = auth_headers['CB-ACCESS-SIGN']
             sub_params['key'] = auth_headers['CB-ACCESS-KEY']
             sub_params['passphrase'] = auth_headers['CB-ACCESS-PASSPHRASE']
@@ -128,7 +133,6 @@ if __name__ == "__main__":
     import cbpro
     import time
 
-
     class MyWebsocketClient(cbpro.WebsocketClient):
         def on_open(self):
             self.url = "wss://ws-feed.pro.coinbase.com/"
@@ -142,7 +146,6 @@ if __name__ == "__main__":
 
         def on_close(self):
             print("-- Goodbye! --")
-
 
     wsClient = MyWebsocketClient()
     wsClient.start()

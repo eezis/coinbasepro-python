@@ -1,7 +1,9 @@
-import pytest
 import json
 import time
 from itertools import islice
+
+import pytest
+
 from cbpro.authenticated_client import AuthenticatedClient
 
 
@@ -72,6 +74,7 @@ def client():
 class TestAuthenticatedClient(object):
     """Test the authenticated client by validating basic behavior from the
     sandbox exchange."""
+
     def test_get_accounts(self, client):
         r = client.get_accounts()
         assert type(r) is list
