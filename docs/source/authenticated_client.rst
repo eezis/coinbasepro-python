@@ -1,9 +1,9 @@
-Authenticaed Client
-===================
+Authenticated Client
+====================
 
 .. contents::
 
-Authenticaed Client
--------------------
+Authenticated Client
+--------------------
 .. automodule:: cbpro.authenticated_client
     :members:
