@@ -332,14 +332,6 @@ while (wsClient.message_count < 500):
     time.sleep(1)
 wsClient.close()
 ```
-## Testing
-A test suite is under development. Tests for the authenticated client require a
-set of sandbox API credentials. To provide them, rename
-`api_config.json.example` in the tests folder to `api_config.json` and edit the
-file accordingly. To run the tests, start in the project directory and run
-```
-python -m pytest
-```
 
 ### Real-time OrderBook
 The ```OrderBook``` subscribes to a websocket and keeps a real-time record of
@@ -354,12 +346,33 @@ time.sleep(10)
 order_book.close()
 ```
 
-### Testing
-Unit tests are under development using the pytest framework. Contributions are
-welcome!
+## Development
 
-To run the full test suite, in the project
-directory run:
+### Development Environment
+A development environment can be created and activated with the commands
 ```bash
-python -m pytest
+make venv && . venv/bin/activate
 ```
+
+### Automated Testing
+Unit test framework uses pytest, coverage, and tox. A test suite is under development,
+please contribute to the coverage. Tests for the authenticated client require a
+set of sandbox API credentials. To provide them, rename
+`api_config.json.example` in the tests folder to `api_config.json` and edit the
+file accordingly. To run the tests, start in the project directory and run
+
+```bash
+make test
+```
+
+### Pre-commit
+This project uses pre-commit to enforce coding style. You can run pre-commit with
+the following command (after activating the venv)
+```bash
+pre-commit run --files [FILES]
+```
+You can also run
+```bash
+pre-commit run --all-files
+```
+but that is guaranteed to fail because of legacy code that has yet to be linted.
