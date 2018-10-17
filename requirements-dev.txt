@@ -7,4 +7,5 @@ pre-commit
 pylint
 pytest
 pytest
+sphinx
 twine

@@ -28,3 +28,11 @@ dist: venv
 
 upload_to_pypi: venv dist
 	venv/bin/twine upload dist/*
+
+.PHONY: docs
+docs: venv
+	venv/bin/sphinx-build docs/source docs/build
+
+.PHONY: serve-docs
+serve-docs: docs
+	pushd docs/build; ../../venv/bin/python3 -m http.server; popd
