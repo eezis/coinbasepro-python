@@ -357,11 +357,8 @@ make venv && . venv/bin/activate
 ```
 
 ### Automated Testing
-Unit test framework uses pytest, coverage, and tox. A test suite is under development,
-please contribute to the coverage. Tests for the authenticated client require a
-set of sandbox API credentials. To provide them, rename
-`api_config.json.example` in the tests folder to `api_config.json` and edit the
-file accordingly. To run the tests, start in the project directory and run
+Unit test framework uses pytest, coverage, and tox. Tests are a work in progress,
+please contribute to the coverage.
 
 ```bash
 make test
@@ -377,4 +374,5 @@ You can also run
 ```bash
 pre-commit run --all-files
 ```
-but that is guaranteed to fail because of legacy code that has yet to be linted.
+
+`make test` also runs pre-commit as a part of its testing routine.
