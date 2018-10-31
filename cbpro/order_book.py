@@ -40,20 +40,21 @@ class OrderBook(WebsocketClient):
         self._asks = SortedDict()
         self._bids = SortedDict()
         res = self._client.get_product_order_book(
-            product_id=self.product_id, level=3)
+            product_id=self.product_id, level=3,
+        )
         for bid in res['bids']:
             self.add({
                 'id': bid[2],
                 'side': 'buy',
                 'price': Decimal(bid[0]),
-                'size': Decimal(bid[1])
+                'size': Decimal(bid[1]),
             })
         for ask in res['asks']:
             self.add({
                 'id': ask[2],
                 'side': 'sell',
                 'price': Decimal(ask[0]),
-                'size': Decimal(ask[1])
+                'size': Decimal(ask[1]),
             })
         self._sequence = res['sequence']
 
@@ -88,14 +89,15 @@ class OrderBook(WebsocketClient):
     def on_sequence_gap(self, gap_start, gap_end):
         self.reset_book()
         print('Error: messages missing ({} - {}). Re-initializing  book at sequence.'.format(
-            gap_start, gap_end, self._sequence))
+            gap_start, gap_end, self._sequence,
+        ))
 
     def add(self, order):
         order = {
             'id': order.get('order_id') or order['id'],
             'side': order['side'],
             'price': Decimal(order['price']),
-            'size': Decimal(order.get('size') or order['remaining_size'])
+            'size': Decimal(order.get('size') or order['remaining_size']),
         }
         if order['side'] == 'buy':
             bids = self.get_bids(order['price'])
@@ -206,7 +208,8 @@ class OrderBook(WebsocketClient):
                 continue
             for order in this_ask:
                 result['asks'].append(
-                    [order['price'], order['size'], order['id']])
+                    [order['price'], order['size'], order['id']],
+                )
         for bid in self._bids:
             try:
                 # There can be a race condition here, where a price point is removed
@@ -217,7 +220,8 @@ class OrderBook(WebsocketClient):
 
             for order in this_bid:
                 result['bids'].append(
-                    [order['price'], order['size'], order['id']])
+                    [order['price'], order['size'], order['id']],
+                )
         return result
 
     def get_ask(self):
@@ -283,7 +287,8 @@ if __name__ == '__main__':
                 self._bid_depth = bid_depth
                 self._ask_depth = ask_depth
                 print('{} {} bid: {:.3f} @ {:.2f}\task: {:.3f} @ {:.2f}'.format(
-                    dt.datetime.now(), self.product_id, bid_depth, bid, ask_depth, ask))
+                    dt.datetime.now(), self.product_id, bid_depth, bid, ask_depth, ask,
+                ))
 
     order_book = OrderBookConsole()
     order_book.start()

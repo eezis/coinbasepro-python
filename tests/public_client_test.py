@@ -103,16 +103,16 @@ class TestPublicClientInterface(object):
                 [
                     "194.77",
                     "14.52299794",
-                    2
-                ]
+                    2,
+                ],
             ],
             "asks": [
                 [
                     "194.78",
                     "64.21370747",
-                    4
-                ]
-            ]
+                    4,
+                ],
+            ],
         }
         pub_client._send_message.return_value = orders
         assert pub_client.get_product_order_book('product', level=1) == orders
@@ -130,7 +130,7 @@ class TestPublicClientInterface(object):
             "bid": "333.98",
             "ask": "333.99",
             "volume": "5957.11914015",
-            "time": "2015-11-14T20:46:03.511254Z"
+            "time": "2015-11-14T20:46:03.511254Z",
         }
         pub_client._send_message.return_value = ticker_info
         assert pub_client.get_product_ticker('product') == ticker_info
@@ -140,19 +140,21 @@ class TestPublicClientInterface(object):
         )
 
     def test_get_product_trades(self, pub_client):
-        trades = [{
-            "time": "2014-11-07T22:19:28.578544Z",
-            "trade_id": 74,
-            "price": "10.00000000",
-            "size": "0.01000000",
-            "side": "buy"
-        }, {
-            "time": "2014-11-07T01:08:43.642366Z",
-            "trade_id": 73,
-            "price": "100.00000000",
-            "size": "0.01000000",
-            "side": "sell"
-        }]
+        trades = [
+            {
+                "time": "2014-11-07T22:19:28.578544Z",
+                "trade_id": 74,
+                "price": "10.00000000",
+                "size": "0.01000000",
+                "side": "buy",
+            }, {
+                "time": "2014-11-07T01:08:43.642366Z",
+                "trade_id": 73,
+                "price": "100.00000000",
+                "size": "0.01000000",
+                "side": "sell",
+            },
+        ]
         pub_client._send_paginated_message.return_value = trades
 
         product = 'ETH-USD'
@@ -160,7 +162,7 @@ class TestPublicClientInterface(object):
             product,
         ) == trades
         pub_client._send_paginated_message.assert_called_with(
-            '/products/{}/trades'.format(product)
+            '/products/{}/trades'.format(product),
         )
 
     def test_get_product_historic_rates(self, pub_client):
@@ -180,7 +182,7 @@ class TestPublicClientInterface(object):
                 194.39,
                 194.45,
                 2.57,
-            ]
+            ],
         ]
         pub_client._send_message.return_value = rates
         product = 'ETH-USD'
@@ -226,7 +228,7 @@ class TestPublicClientInterface(object):
                 "min_size": "0.01000000",
                 "status": "online",
                 "message": None,
-            }
+            },
         ]
         pub_client._send_message.return_value = currencies
         assert pub_client.get_currencies() == currencies
@@ -238,7 +240,7 @@ class TestPublicClientInterface(object):
     def test_get_time(self, pub_client):
         time = {
             "iso": "2018-10-31T06:48:34.184Z",
-            "epoch": 1540968514.184
+            "epoch": 1540968514.184,
         }
         pub_client._send_message.return_value = time
         assert pub_client.get_time() == time

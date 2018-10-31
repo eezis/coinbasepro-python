@@ -3,28 +3,29 @@ repos:
     sha: v1.2.1-1
     hooks:
       - id: trailing-whitespace
-        language_version: python3.6
       - id: end-of-file-fixer
-        language_version: python3.6
       - id: autopep8-wrapper
-        language_version: python3.6
       - id: check-yaml
-        language_version: python3.6
       - id: debug-statements
-        language_version: python3.6
       - id: name-tests-test
-        language_version: python3.6
       - id: check-added-large-files
-        language_version: python3.6
       - id: check-byte-order-marker
-        language_version: python3.6
       - id: flake8
-        language_version: python3.6
       - id: requirements-txt-fixer
-        language_version: python3.6
       - id: detect-private-key
-        language_version: python3.6
   - repo: https://github.com/asottile/reorder_python_imports
     sha: v1.1.0
     hooks:
       - id: reorder-python-imports
+  - repo: https://github.com/pre-commit/mirrors-autopep8
+    sha: v1.4.2
+    hooks:
+      - id: autopep8
+  - repo: https://github.com/asottile/add-trailing-comma
+    sha: v0.7.1
+    hooks:
+      - id: add-trailing-comma
+  - repo: https://github.com/asottile/yesqa
+    rev: v0.0.8
+    hooks:
+      - id: yesqa

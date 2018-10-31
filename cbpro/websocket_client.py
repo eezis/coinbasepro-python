@@ -69,14 +69,17 @@ class WebsocketClient(object):
         if self.channels is None:
             sub_params = {'type': 'subscribe', 'product_ids': self.products}
         else:
-            sub_params = {'type': 'subscribe',
-                          'product_ids': self.products, 'channels': self.channels}
+            sub_params = {
+                'type': 'subscribe',
+                'product_ids': self.products, 'channels': self.channels,
+            }
 
         if self.auth:
             timestamp = str(time.time())
             message = timestamp + 'GET' + '/users/self/verify'
             auth_headers = get_auth_headers(
-                timestamp, message, self.api_key, self.api_secret, self.api_passphrase)
+                timestamp, message, self.api_key, self.api_secret, self.api_passphrase,
+            )
             sub_params['signature'] = auth_headers['CB-ACCESS-SIGN']
             sub_params['key'] = auth_headers['CB-ACCESS-KEY']
             sub_params['passphrase'] = auth_headers['CB-ACCESS-PASSPHRASE']
@@ -108,7 +111,7 @@ class WebsocketClient(object):
         try:
             if self.ws:
                 self.ws.close()
-        except WebSocketConnectionClosedException as e:
+        except WebSocketConnectionClosedException:
             pass
         finally:
             self.keepalive.join()

@@ -15,12 +15,16 @@ class CBProAuth(AuthBase):
 
     def __call__(self, request):
         timestamp = str(time.time())
-        message = ''.join([timestamp, request.method,
-                           request.path_url, (request.body or '')])
-        request.headers.update(get_auth_headers(timestamp, message,
-                                                self.api_key,
-                                                self.secret_key,
-                                                self.passphrase))
+        message = ''.join([
+            timestamp, request.method,
+            request.path_url, (request.body or ''),
+        ])
+        request.headers.update(get_auth_headers(
+            timestamp, message,
+            self.api_key,
+            self.secret_key,
+            self.passphrase,
+        ))
         return request
 
 
@@ -34,5 +38,5 @@ def get_auth_headers(timestamp, message, api_key, secret_key, passphrase):
         'CB-ACCESS-SIGN': signature_b64,
         'CB-ACCESS-TIMESTAMP': timestamp,
         'CB-ACCESS-KEY': api_key,
-        'CB-ACCESS-PASSPHRASE': passphrase
+        'CB-ACCESS-PASSPHRASE': passphrase,
     }

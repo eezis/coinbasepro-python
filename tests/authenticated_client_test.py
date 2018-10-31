@@ -87,7 +87,7 @@ class TestAccountCalls():
                 'available': '79.2266348066930000',
                 'hold': '1.0035025000000000',
                 'profile_id': '75da88c5-05bf-4f54-bc85-5c775bd68254',
-            }
+            },
         ]
         auth_client._send_message.return_value = accounts
         returned_accounts = auth_client.get_accounts()
@@ -104,9 +104,9 @@ class TestAccountCalls():
                 "details": {
                     "order_id": "d50ec984-77a8-460a-b958-66f114b0de9b",
                     "trade_id": "74",
-                    "product_id": "BTC-USD"
-                }
-            }
+                    "product_id": "BTC-USD",
+                },
+            },
         ]
         auth_client._send_paginated_message.return_value = history
         returned_history = auth_client.get_account_history(
@@ -125,7 +125,7 @@ class TestAccountCalls():
                 "amount": "4.23",
                 "type": "order",
                 "ref": "0a205de4-dd35-4370-a285-fe8fc375a273",
-            }
+            },
         ]
         auth_client._send_paginated_message.return_value = holds
         returned_holds = auth_client.get_account_holds(

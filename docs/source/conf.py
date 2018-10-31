@@ -114,7 +114,7 @@ html_sidebars = {
         'relations.html',
         'searchbox.html',
         'sourcelink.html',
-    ]
+    ],
 }
 
 
@@ -148,8 +148,10 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'cbpro2.tex', 'cbpro2 Documentation',
-     'Daniel Paquin, yiwen song', 'manual'),
+    (
+        master_doc, 'cbpro2.tex', 'cbpro2 Documentation',
+        'Daniel Paquin, yiwen song', 'manual',
+    ),
 ]
 
 
@@ -158,8 +160,10 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'cbpro2', 'cbpro2 Documentation',
-     [author], 1)
+    (
+        master_doc, 'cbpro2', 'cbpro2 Documentation',
+        [author], 1,
+    ),
 ]
 
 
@@ -169,9 +173,11 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'cbpro2', 'cbpro2 Documentation',
-     author, 'cbpro2', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        master_doc, 'cbpro2', 'cbpro2 Documentation',
+        author, 'cbpro2', 'One line description of project.',
+        'Miscellaneous',
+    ),
 ]
 
 

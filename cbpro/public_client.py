@@ -113,8 +113,10 @@ class PublicClient(object):
                 }
 
         """
-        return self._send_message('get',
-                                  '/products/{}/ticker'.format(product_id))
+        return self._send_message(
+            'get',
+            '/products/{}/ticker'.format(product_id),
+        )
 
     def get_product_trades(self, product_id, before='', after='', limit=None, result=None):
         """List the latest trades for a product.
@@ -148,8 +150,10 @@ class PublicClient(object):
         return self._send_paginated_message('/products/{}/trades'
                                             .format(product_id))
 
-    def get_product_historic_rates(self, product_id, start=None, end=None,
-                                   granularity=None):
+    def get_product_historic_rates(
+        self, product_id, start=None, end=None,
+        granularity=None,
+    ):
         """Historic rates for a product.
 
         Rates are returned in grouped buckets based on requested
@@ -194,12 +198,15 @@ class PublicClient(object):
             acceptedGrans = [60, 300, 900, 3600, 21600, 86400]
             if granularity not in acceptedGrans:
                 raise ValueError('Specified granularity is {}, must be in approved values: {}'.format(
-                    granularity, acceptedGrans))
+                    granularity, acceptedGrans,
+                ))
 
             params['granularity'] = granularity
-        return self._send_message('get',
-                                  '/products/{}/candles'.format(product_id),
-                                  params=params)
+        return self._send_message(
+            'get',
+            '/products/{}/candles'.format(product_id),
+            params=params,
+        )
 
     def get_product_24hr_stats(self, product_id):
         """Get 24 hr stats for the product.
@@ -218,8 +225,10 @@ class PublicClient(object):
                     }
 
         """
-        return self._send_message('get',
-                                  '/products/{}/stats'.format(product_id))
+        return self._send_message(
+            'get',
+            '/products/{}/stats'.format(product_id),
+        )
 
     def get_currencies(self):
         """List known currencies.
@@ -267,8 +276,10 @@ class PublicClient(object):
 
         """
         url = self.url + endpoint
-        r = self.session.request(method, url, params=params, data=data,
-                                 auth=self.auth, timeout=self.timeout)
+        r = self.session.request(
+            method, url, params=params, data=data,
+            auth=self.auth, timeout=self.timeout,
+        )
         return r.json()
 
     def _send_paginated_message(self, endpoint, params=None):
@@ -298,8 +309,10 @@ class PublicClient(object):
             params = dict()
         url = self.url + endpoint
         while True:
-            r = self.session.get(url, params=params,
-                                 auth=self.auth, timeout=self.timeout)
+            r = self.session.get(
+                url, params=params,
+                auth=self.auth, timeout=self.timeout,
+            )
             results = r.json()
             for result in results:
                 yield result
