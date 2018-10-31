@@ -110,7 +110,7 @@ class WebsocketClient(object):
 
     def close(self):
         self.stop = True   # will only disconnect after next msg recv
-        self._disconnect() # force disconnect so threads can join
+        self._disconnect()  # force disconnect so threads can join
         self.thread.join()
 
     def on_open(self):
