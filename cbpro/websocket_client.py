@@ -6,14 +6,10 @@
 # Template object to receive messages from the Coinbase Websocket Feed
 from __future__ import print_function
 
-import base64
-import hashlib
-import hmac
 import json
 import time
 from threading import Thread
 
-from pymongo import MongoClient
 from websocket import create_connection
 from websocket import WebSocketConnectionClosedException
 
@@ -21,8 +17,19 @@ from cbpro.cbpro_auth import get_auth_headers
 
 
 class WebsocketClient(object):
-    def __init__(self, url="wss://ws-feed.pro.coinbase.com", products=None, message_type="subscribe", mongo_collection=None,
-                 should_print=True, auth=False, api_key="", api_secret="", api_passphrase="", channels=None):
+    def __init__(
+            self,
+            url="wss://ws-feed.pro.coinbase.com",
+            products=None,
+            message_type="subscribe",
+            mongo_collection=None,
+            should_print=True,
+            auth=False,
+            api_key="",
+            api_secret="",
+            api_passphrase="",
+            channels=None,
+    ):
         self.url = url
         self.products = products
         self.channels = channels
@@ -136,7 +143,6 @@ class WebsocketClient(object):
 if __name__ == "__main__":
     import sys
     import cbpro
-    import time
 
     class MyWebsocketClient(cbpro.WebsocketClient):
         def on_open(self):
