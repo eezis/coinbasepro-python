@@ -1,16 +1,12 @@
-#
-# cbpro/AuthenticatedClient.py
-# Daniel Paquin
-#
-# For authenticated requests to the Coinbase exchange
-import base64
-import hashlib
-import hmac
+"""
+cbpro/AuthenticatedClient.py
+Daniel Paquin
+
+For authenticated requests to the Coinbase exchange
+"""
 import json
-import time
 
 import requests
-from requests.auth import AuthBase
 
 from cbpro.cbpro_auth import CBProAuth
 from cbpro.public_client import PublicClient
