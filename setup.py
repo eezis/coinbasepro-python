@@ -25,7 +25,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='cbpro2',
-    version='1.0.3',
+    version='1.0.4',
     author='Daniel Paquin',
     author_email='dpaq34@gmail.com',
     license='MIT',
