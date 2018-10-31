@@ -27,6 +27,7 @@ class PublicClient(object):
         self.url = api_url.rstrip('/')
         self.auth = None
         self.session = requests.Session()
+        self.timeout = timeout
 
     def get_products(self):
         """Get a list of available currency pairs for trading.
@@ -84,9 +85,11 @@ class PublicClient(object):
 
         """
         params = {'level': level}
-        return self._send_message('get',
-                                  '/products/{}/book'.format(product_id),
-                                  params=params)
+        return self._send_message(
+            'get',
+            '/products/{}/book'.format(product_id),
+            params=params,
+        )
 
     def get_product_ticker(self, product_id):
         """Snapshot about the last trade (tick), best bid/ask and 24h volume.
@@ -265,7 +268,7 @@ class PublicClient(object):
         """
         url = self.url + endpoint
         r = self.session.request(method, url, params=params, data=data,
-                                 auth=self.auth, timeout=30)
+                                 auth=self.auth, timeout=self.timeout)
         return r.json()
 
     def _send_paginated_message(self, endpoint, params=None):
@@ -296,7 +299,7 @@ class PublicClient(object):
         url = self.url + endpoint
         while True:
             r = self.session.get(url, params=params,
-                                 auth=self.auth, timeout=30)
+                                 auth=self.auth, timeout=self.timeout)
             results = r.json()
             for result in results:
                 yield result
@@ -309,3 +312,4 @@ class PublicClient(object):
                 break
             else:
                 params['after'] = r.headers['cb-after']
+        return
