@@ -8,7 +8,7 @@ from setuptools import setup
 
 INSTALL_REQUIRES = [
     'pymongo>=3.5.1',
-    'python-dateutil',
+    'python-dateutil>=2.8.0',
     'requests>=2.13.0',
     'six>=1.10.0',
     'sortedcontainers>=1.5.9',
